@@ -5,6 +5,7 @@ This repository contains my implementations of fundamental algorithms and data s
 ## Structure
 
 - Data Structures and Algorithms (C++)
+- Systems Programming Projects (C)
 - Numerical Methods (Python)
 - Artificial Intelligence and Machine Learning Algorithms (Python)
 - Deep Neural Network Architectures (Python)
