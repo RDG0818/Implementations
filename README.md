@@ -1,6 +1,6 @@
 ﻿# Implementations
 
-This repository contains my implementations of fundamental algorithms and data structures across various domains. The goal is to build a solid understanding of core computational techniques through hands-on implementations.
+This repository contains my implementations of fundamental algorithms and data structures across various domains. The goal is to build a solid understanding of core computational techniques through hands-on implementations. Additionally, this repository contains class projects I have done.
 
 ## Structure
 
