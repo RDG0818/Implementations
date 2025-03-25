@@ -1,3 +1,18 @@
+/*
+Basic implementation of a vector in C++. 
+
+Asymptotic Complexity:
+Random Access: O(1)
+Insertion (end): amortized O(1), worst case O(n)
+Insertion (front or middle): O(n)
+Deletion (end): O(1)
+Deletion (front or middle): O(n)
+Search (unsorted): O(n)
+Search (sorted): O(log(n))
+Space: O(n)
+
+*/
+
 #include <iostream>
 
 using namespace std;
