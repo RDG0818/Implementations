@@ -2,7 +2,6 @@
 # This is most notably used in Google's PageRank algorithm, but is also used in PCA as well as finding the stationary distribution of a Markov Chain.
 
 import numpy as np
-import manim
 
 def power_method(A, x, iter=101): # Finds the largest eigenvalue of A
     for _ in range(iter):
