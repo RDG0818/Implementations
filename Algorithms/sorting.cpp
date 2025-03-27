@@ -16,6 +16,11 @@ Bubble Sort:
     Benefits: Stable, In-place, Adaptive
 
 Insertion Sort:
+    Best Case: O(n)
+    Average Case: O(n^2)
+    Worst Case: O(n^2)
+
+    Benefits: Stable, In-place, Adaptive
 
 Merge Sort:
 
@@ -52,7 +57,21 @@ template <typename T> void bubbleSort(vector<T>& v) {
 }
 
 template <typename T> void insertionSort(vector<T>& v) {
+    for (int i = 1; i < v.size(); i++) {
+        print(v);
+        T currElement = v[i];
+        int j = i - 1;
+        while (j >= 0 and currElement < v[j]) {
+            v[j+1] = v[j];
+            j--;
+        }
+        v[j+1] = currElement;
+        
+    }
+}
 
+template <typename T> void mergeSort(vector<T>& v) {
+    
 }
 
 template <typename T> void print(vector<T>& v) {
@@ -73,11 +92,20 @@ int main() {
     vector<int> v2 = {10, 9, 8, 6, 7};
     bubbleSort(v2);
     print(v2);
+    cout << endl;
 
     cout << "Test Case 3:" << endl;
     cout << "Expected Output: [11, 12, 13, 14, 15]" << endl;
     vector<int> v3 = {15, 14, 11, 12, 13};
     insertionSort(v3);
     print(v3);
+    cout << endl;
+
+    cout << "Test Case 4:" << endl;
+    cout << "Expected Output: ['a', 'b', 'c', 'd', 'e']" << endl;
+    vector<char> v4 = {'e', 'c', 'a', 'b', 'd'};
+    mergeSort(v4);
+    print(v4);
+    cout << endl;
     return 0;
 }
