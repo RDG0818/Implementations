@@ -23,8 +23,18 @@ Insertion Sort:
     Benefits: Stable, In-place, Adaptive
 
 Merge Sort:
+    Best Case: O(n log n)
+    Average Case: O(n log n)
+    Worst Case: O(n log n)
+    
+    Benefits: Stable
 
 Quick Sort:
+    Best Case: O(n log n)
+    Average Case: O(n log n)
+    Worst Case: O(n log n)
+
+    Benefits: In-place
 
 */
 
@@ -71,7 +81,11 @@ template <typename T> void insertionSort(vector<T>& v) {
 }
 
 template <typename T> void mergeSort(vector<T>& v) {
-    
+
+}
+
+template <typename T> void quickSort(vector<T>& v) {
+
 }
 
 template <typename T> void print(vector<T>& v) {
@@ -107,5 +121,7 @@ int main() {
     mergeSort(v4);
     print(v4);
     cout << endl;
+
+    
     return 0;
 }
