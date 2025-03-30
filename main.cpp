@@ -36,20 +36,3 @@ int main() {
     }
     return 0;
 }
-
-/*
-
-        cin >> n >> a >> b;
-        vll v(n);
-        read(v);
-        ll GCD = gcd(a, b);
-        for (int i = 0; i < v.size(); i++) {
-            v[i] = v[i] % GCD;
-        } 
-        sort(v.begin(), v.end());
-        
-        ll smallest_diff = v[v.size() - 1] - v[0];
-        for (int i = 0; i < v.size() - 1; i++) {
-            smallest_diff = min(smallest_diff, v[i] + GCD - v[i+1]);
-        }
-        cout << smallest_diff << endl << endl;*/

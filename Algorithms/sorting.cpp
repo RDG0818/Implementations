@@ -32,7 +32,7 @@ Merge Sort:
 Quick Sort:
     Best Case: O(n log n)
     Average Case: O(n log n)
-    Worst Case: O(n log n)
+    Worst Case: O(n^2)
 
     Benefits: In-place
 
@@ -68,7 +68,6 @@ template <typename T> void bubbleSort(vector<T>& v) {
 
 template <typename T> void insertionSort(vector<T>& v) {
     for (int i = 1; i < v.size(); i++) {
-        print(v);
         T currElement = v[i];
         int j = i - 1;
         while (j >= 0 and currElement < v[j]) {
@@ -76,12 +75,28 @@ template <typename T> void insertionSort(vector<T>& v) {
             j--;
         }
         v[j+1] = currElement;
-        
     }
 }
 
-template <typename T> void mergeSort(vector<T>& v) {
+template <typename T> vector<T> merge(const vector<T>& v1, const vector<T>& v2) {
+    vector<T> merged_vector; int i = 0; int j = 0;
+    while (i < v1.size() && j < v2.size()) {
+        if (v1[i] <= v2[j]) merged_vector.push_back(v1[i++]); 
+        else merged_vector.push_back(v2[j++]);
+    }
 
+    while (i < v1.size()) merged_vector.push_back(v1[i++]);
+    while (j < v2.size()) merged_vector.push_back(v2[j++]);
+
+    return merged_vector;
+}
+
+template <typename T> vector<T> mergeSort(vector<T> v) {
+    vector<T> left(v.begin(), v.begin() + v.size()/2);
+    vector<T> right(v.begin() + v.size()/2, v.end());
+    if (left.size() > 1) left = mergeSort(left);
+    if (right.size() > 1) right = mergeSort(right);
+    return merge(left, right);
 }
 
 template <typename T> void quickSort(vector<T>& v) {
@@ -118,10 +133,10 @@ int main() {
     cout << "Test Case 4:" << endl;
     cout << "Expected Output: ['a', 'b', 'c', 'd', 'e']" << endl;
     vector<char> v4 = {'e', 'c', 'a', 'b', 'd'};
-    mergeSort(v4);
+    v4 = mergeSort(v4);
     print(v4);
     cout << endl;
 
-    
+
     return 0;
 }
