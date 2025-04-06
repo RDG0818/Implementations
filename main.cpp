@@ -22,17 +22,35 @@ ll a, b, c, n, m, k, q, t, x, y, z;
 int main() {
     cin >> t;
     while (t--) {
-        cin >> n;
-        vll v(n, 0);
-        read(v);
-        vll dp(n, 0);
-        dp[n - 1] = 1;
-        for (int i = n - 2; i >= 0; i--) {
-            if (i + v[i] + 1 < n) dp[i] = min(dp[i+1] + 1, dp[i + v[i] + 1]);
-            else if (i + v[i] + 1 == n) dp[i] = 0;
-            else dp[i] = dp[i+1] + 1;
+    cin >> a >> b >> c;
+    vll v(a);
+    read(v);
+    queue<int> q;
+    int count = 0;
+    int subsum = 0;
+    for (int i = 0; i < a; i++) {
+        q.push(v[i]);
+        subsum += v[i];
+        if (subsum >= b and subsum <= c) {
+            count++;
+            while(!q.empty()) q.pop();
+            subsum = 0;
+        }  
+        else if (subsum > c) {
+            while (subsum > c) {
+            int temp = q.front();
+            q.pop();
+            subsum-=temp;
+            }
+            if (subsum >= b and subsum <= c) {
+                count++;
+                while(!q.empty()) q.pop();
+                subsum = 0;
+            } 
         }
-        cout << dp[0] << endl << endl;
-    }
+
+    }   
+    cout << count << endl << endl;
+        }
     return 0;
 }
