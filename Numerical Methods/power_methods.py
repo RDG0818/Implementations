@@ -35,4 +35,3 @@ def symmetric_inverse_power_method(A, x, q, iter=101):
         muk = 1/lam + q
     return muk
 
-
