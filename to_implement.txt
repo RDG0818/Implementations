@@ -1,0 +1,37 @@
+DS:
+AVL Tree
+Red Black Tree
+Segment Trees
+Fenwick Trees
+Max/Min Heaps
+Fibonacci Heap
+
+String Algorithms:
+KMP
+Rabin Karp
+Z ?
+
+Graphs:
+DFS/BFS
+Djikstra's 
+Bellman Ford
+Figuring out clique num
+Check Bipartition
+SCC
+Minimum Spanning Tree
+Minimum Path Covering
+
+AI/ML:
+GPT2
+Diffusion Models
+KNN
+Naive Bayes
+Decision Trees/Random Forest
+SVMs
+Perceptrons/MLP
+Convolutional NN
+Logistic Regression
+K-Means Clustering
+Principal Component Analysis
+Gradient Descent/SGD
+Backprop

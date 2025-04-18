@@ -20,37 +20,45 @@ str s, s1, s2, s3, s4, s5;
 ll a, b, c, n, m, k, q, t, x, y, z;
 
 int main() {
-    cin >> t;
-    while (t--) {
-    cin >> a >> b >> c;
-    vll v(a);
+    cin >> n >> k;
+    vll v(n);
     read(v);
-    queue<int> q;
-    int count = 0;
-    int subsum = 0;
-    for (int i = 0; i < a; i++) {
-        q.push(v[i]);
-        subsum += v[i];
-        if (subsum >= b and subsum <= c) {
-            count++;
-            while(!q.empty()) q.pop();
-            subsum = 0;
-        }  
-        else if (subsum > c) {
-            while (subsum > c) {
-            int temp = q.front();
-            q.pop();
-            subsum-=temp;
-            }
-            if (subsum >= b and subsum <= c) {
-                count++;
-                while(!q.empty()) q.pop();
-                subsum = 0;
-            } 
-        }
 
-    }   
-    cout << count << endl << endl;
+    sort(v.begin(), v.end());
+    ll upper = v[v.size() - 1] + 1;
+    ll lower = 1;
+    ll midpoint;
+    ll iteration = 0;
+
+    while (true) {
+        //if (iteration++ > 10) break;
+        midpoint = (upper + lower)/2;
+        //cout << midpoint << endl;
+        ll sum = 0;
+        for (ll num : v) {
+            sum += ((num-1) / midpoint)+1;
         }
+        if (sum <= k) {
+            ll midpoint1 = midpoint - 1;
+            if (midpoint1 == 0) break;
+            ll sum1 = 0;
+            for (ll num : v) {
+                sum1 += ((num-1) / midpoint1)+1;
+            }
+            if (sum1 <= k) {
+                upper = midpoint;
+            }
+            else {
+                break;
+            }
+        }
+        else {
+            lower = midpoint;
+        }
+        
+    }
+
+    cout << midpoint << endl;
+
     return 0;
 }

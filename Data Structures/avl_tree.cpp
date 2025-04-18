@@ -8,8 +8,9 @@ template <typename T> class Node {
     Node<T>* right;
     Node<T>* left;
     T value;
-    int height = 0;
+    int balance_factor;
     Node<T>(T value=T{}, Node<T>* parent=nullptr, Node<T>* right=nullptr, Node<T>* left=nullptr);   
+    int _get_balance();
 };
 
 template <typename T> Node<T>::Node(T value, Node<T>* parent, Node<T>* right, Node<T>* left) {
@@ -96,7 +97,6 @@ template <typename T> void AVL<T>::insert(T value) {
         Node<T>* currNode = root;
         while (currNode != nullptr) {
             parent = currNode;
-            currNode->height++;
             if (currNode->value > value) currNode = currNode->left;
             else currNode = currNode->right;
         }
