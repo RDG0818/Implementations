@@ -1,5 +1,4 @@
 DS:
-AVL Tree
 Red Black Tree
 Segment Trees
 Fenwick Trees
@@ -9,7 +8,7 @@ Fibonacci Heap
 String Algorithms:
 KMP
 Rabin Karp
-Z ?
+Z-algorithm
 
 Graphs:
 DFS/BFS
@@ -20,18 +19,42 @@ Check Bipartition
 SCC
 Minimum Spanning Tree
 Minimum Path Covering
+Connectivity (bridges/articulation points)
 
 AI/ML:
+Ridge/Lasso Regression
+Polynomial Regression
 GPT2
 Diffusion Models
 KNN
 Naive Bayes
 Decision Trees/Random Forest
+Gradient Boosted Trees
 SVMs
+Gaussian Process
 Perceptrons/MLP
 Convolutional NN
 Logistic Regression
 K-Means Clustering
 Principal Component Analysis
 Gradient Descent/SGD
-Backprop
+Backpropagation
+PCA
+Gaussian Mixture Models
+Q-learning
+SARSA
+DQN
+Policy Gradient
+Actor-Critic
+PPO
+Recurrent Neural Networks
+Generative Models
+Graph Networks
+NLP
+
+Numerical Analysis:
+Newton's Method
+Relaxation Methods/Iterative Algebraic Solvers
+Google Matrix/Data Mining
+Dr. Kim's other stuff idk
+
