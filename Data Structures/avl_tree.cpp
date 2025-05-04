@@ -57,8 +57,7 @@ template <typename T> AVL<T>::AVL(Node<T>* root) {
 }
 
 // Copy Constructor 
-template <typename T>
-AVL<T>::AVL(const AVL<T>& other) {
+template <typename T> AVL<T>::AVL(const AVL<T>& other) {
     _size = other._size;
     auto copyTree = [&](auto& self, Node<T>* node, Node<T>* parent) -> Node<T>* {
         if (!node)
@@ -73,8 +72,7 @@ AVL<T>::AVL(const AVL<T>& other) {
 }
 
 // Assignment Operator
-template <typename T>
-AVL<T>& AVL<T>::operator=(const AVL<T>& other) {
+template <typename T> AVL<T>& AVL<T>::operator=(const AVL<T>& other) {
     if (this != &other) {
         auto deleteTree = [&](auto& self, Node<T>* node) -> void {
             if (!node)
@@ -233,6 +231,20 @@ template <typename T> void AVL<T>::print(Node<T>* node) {
     }
 }
 
+/*=========================================================================================
+
+Before Right Rotation (on y) -----> Right Rotate(y) ----> After Right Rotation (on y)
+After Left Rotation (on x)   <----- Left Rotate(x) <----- Before Left Rotation (on x)
+
+                         (y)                            (x)
+                        /   \                          /   \
+                      (x)   T3                        T1   (y)
+                     /   \                                /   \
+                    T1   T2                              T2   T3
+                    
+==========================================================================================*/
+
+
 template <typename T> void AVL<T>::rotateLeft(Node<T>* x) {
     Node<T>* y = x->right;
     Node<T>* T2 = y->left;
@@ -282,8 +294,7 @@ template <typename T> void AVL<T>::rotateRight(Node<T>* y) {
 }
 
 // Destructor
-template <typename T>
-AVL<T>::~AVL() {
+template <typename T> AVL<T>::~AVL() {
     auto deleteTree = [&](auto& self, Node<T>* node) -> void {
         if (!node)
             return;

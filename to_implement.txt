@@ -5,10 +5,16 @@ Fenwick Trees
 Max/Min Heaps
 Fibonacci Heap
 
-String Algorithms:
+String/Pattern Matching Algorithms:
 KMP
 Rabin Karp
 Z-algorithm
+Kasai's
+RMQ Tables
+
+Number Theory:
+Pollard's rho
+Miller Rabin/Sieve
 
 Graphs:
 DFS/BFS

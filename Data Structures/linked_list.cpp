@@ -1,5 +1,5 @@
 /*
-Basic implementation of a linked list in C++. As can be used as a LIFO stack or FIFO queue.
+Basic implementation of a linked list in C++. It can additionally be used as a LIFO stack or FIFO queue.
 
 Asymptotic Complexity:
 Random Access: O(n)
