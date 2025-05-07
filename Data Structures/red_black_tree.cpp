@@ -11,6 +11,8 @@ Deletion: O(log n)
 Search: O(log n)
 Space: O(n)
 */
+#include <iostream>
+
 using namespace std;
 
 template <typename T> class Node {
@@ -38,6 +40,7 @@ public:
     RedBlack<T>(Node<T>* root = nullptr);
     RedBlack(const RedBlack<T>& other);
     RedBlack& operator=(const RedBlack<T>& other);
+    Node<T>* copyTree(Node<T>* source, Node<T>* parent);
     int size();
     void insert(T value);
     bool count(T value);
@@ -57,12 +60,45 @@ template <typename T> RedBlack<T>::RedBlack(Node<T>* root) {
 
 // Copy Constructor
 template <typename T> RedBlack<T>::RedBlack(const RedBlack<T>& other) {
-
+    if (other.root == nullptr) {
+        root = nullptr;
+        _size = 0;
+    } else {
+        root = copyTree(other.root, nullptr);
+        _size = other._size;
+    }
 }
 
 // Assignment Operator
 template <typename T> RedBlack<T>& RedBlack<T>::operator=(const RedBlack<T>& other) {
+    if (this != &other) {
+        auto deleteTree = [](auto& self, Node<T>* node) -> void {
+            if (!node) return;
+            self(self, node->left);
+            self(self, node->right);
+            delete node;
+        };
+        deleteTree(deleteTree, root);
+        root = nullptr;
+        _size = 0;
 
+        if (other.root != nullptr) {
+            root = copyTree(other.root, nullptr);
+            _size = other._size;
+        }
+    }
+    return *this;
+}
+
+// Helper Copy Function
+template <typename T> Node<T>* RedBlack<T>::copyTree(Node<T>* source, Node<T>* parent) {
+    if (source == nullptr) {
+        return nullptr;
+    }
+    Node<T>* newNode = new Node<T>(source->value, parent, nullptr, nullptr, source->color);
+    newNode->left = copyTree(source->left, newNode);
+    newNode->right = copyTree(source->right, newNode);
+    return newNode;
 }
 
 // Size Function
@@ -120,11 +156,51 @@ After Left Rotation (on x)   <----- Left Rotate(x) <----- Before Left Rotation (
 ==========================================================================================*/
 
 template <typename T> void RedBlack<T>::rotateLeft(Node<T>* x) {
+    Node<T>* y = x->right;
+    Node<T>* T2 = y->left;
 
+    y->left = x;
+    x->right = T2;
+
+    y->parent = x->parent;
+    x->parent = y;
+    if (T2 != nullptr) {
+        T2->parent = x;
+    }
+
+    if (y->parent != nullptr) {
+        if (y->parent->left == x) {
+            y->parent->left = y;
+        } else {
+            y->parent->right = y;
+        }
+    } else {
+        root = y;
+    }
 }
 
 template <typename T> void RedBlack<T>:: rotateRight(Node<T>* y) {
+    Node<T>* x = y->left;
+    Node<T>* T2 = x->right;
 
+    x->right = y;
+    y->left = T2;
+
+    x->parent = y->parent;
+    y->parent = x;
+    if (T2 != nullptr) {
+        T2->parent = y;
+    }
+
+    if (x->parent != nullptr) {
+        if (x->parent->left == y) {
+            x->parent->left = x;
+        } else {
+            x->parent->right = x;
+        }
+    } else {
+        root = x;
+    }
 }
 
 // Destructor
@@ -140,5 +216,7 @@ template <typename T> RedBlack<T>::~RedBlack() {
 }
 
 int main() {
+    RedBlack<int> rb;
+    cout << rb.size() << endl;
     return 0;
 }
