@@ -108,7 +108,29 @@ template <typename T> int RedBlack<T>::size() {
 
 // Insert Function
 template <typename T> void RedBlack<T>::insert(T value) {
+    Node<T>* currNode = root;
+    Node<T>* newNode = new Node<T>;
+    newNode->value = value;
+    newNode->color = 0; // Assume new node is red
+    
+    // Case 1: currNode is root
+    if (root == nullptr) {
+        root = newNode;
+        newNode->color = 1;
+        return;
+    }
+    
+    while (currNode != nullptr) {
+        if (newNode->value > currNode->value) currNode = currNode->right;
+        else currNode->left;
+    }
+    newNode = currNode;
 
+    // Case 2: currNode has a red uncle
+    
+    if (currNode-) {
+
+    }
 }
 
 // Count Function

@@ -99,9 +99,37 @@ template <typename T> vector<T> mergeSort(vector<T> v) {
     return merge(left, right);
 }
 
-template <typename T> void quickSort(vector<T>& v) {
+template <typename T> int partition(std::vector<T>& v, int low, int high) {
+    T pivot = v[high];          
+    int i = low - 1;
 
+    for (int j = low; j < high; j++) {  
+        if (v[j] < pivot) {
+            i++;
+            std::swap(v[i], v[j]);
+        }
+    }
+    i++;
+    std::swap(v[i], v[high]);
+    return i;                            
 }
+
+template <typename T> void quickSortImpl(std::vector<T>& v, int low, int high) {
+    if (low >= high) return;
+
+    int p = partition(v, low, high);  
+    quickSortImpl(v, low, p - 1);     
+    quickSortImpl(v, p + 1, high);    
+}
+
+template <typename T> void quickSort(std::vector<T>& v) {
+    if (v.empty()) return;
+    quickSortImpl(v, 0, static_cast<int>(v.size()) - 1);
+}
+
+
+
+
 
 template <typename T> void print(vector<T>& v) {
     for (T element : v) cout << element << " ";
@@ -135,6 +163,13 @@ int main() {
     vector<char> v4 = {'e', 'c', 'a', 'b', 'd'};
     v4 = mergeSort(v4);
     print(v4);
+    cout << endl;
+
+    cout << "Test Case 5:" << endl;
+    cout << "Expected Output: [10, 15, 20, 25, 30]" << endl;
+    vector<int> v5 = {25, 10, 15, 30, 20};
+    quickSort(v5);
+    print(v5);
     cout << endl;
 
 

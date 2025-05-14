@@ -1,66 +1,74 @@
-DS:
-Red Black Tree
-Segment Trees
-Fenwick Trees
-Max/Min Heaps
-Fibonacci Heap
+Core Data Structures
 
-String/Pattern Matching Algorithms:
-KMP
-Rabin Karp
-Z-algorithm
-Kasai's
-RMQ Tables
+    Balanced BSTs Red-Black Tree | Treap | Persistent Segment Tree
 
-Number Theory:
-Pollard's rho
-Miller Rabin/Sieve
+    Heaps & PQs Binary Max/Min Heap | Fibonacci Heap | Pairing Heap
 
-Graphs:
-DFS/BFS
-Djikstra's 
-Bellman Ford
-Figuring out clique num
-Check Bipartition
-SCC
-Minimum Spanning Tree
-Minimum Path Covering
-Connectivity (bridges/articulation points)
+    Range / Order Segment Tree (+ lazy) | Fenwick Tree (BIT) | Wavelet Tree | Sparse Table (RMQ)
 
-AI/ML:
-Ridge/Lasso Regression
-Polynomial Regression
-GPT2
-Diffusion Models
-KNN
-Naive Bayes
-Decision Trees/Random Forest
-Gradient Boosted Trees
-SVMs
-Gaussian Process
-Perceptrons/MLP
-Convolutional NN
-Logistic Regression
-K-Means Clustering
-Principal Component Analysis
-Gradient Descent/SGD
-Backpropagation
-PCA
-Gaussian Mixture Models
-Q-learning
-SARSA
-DQN
-Policy Gradient
-Actor-Critic
-PPO
-Recurrent Neural Networks
-Generative Models
-Graph Networks
-NLP
+    Disjoint Sets Union–Find (DSU) with path compression & union-by-rank
 
-Numerical Analysis:
-Newton's Method
-Relaxation Methods/Iterative Algebraic Solvers
-Google Matrix/Data Mining
-Dr. Kim's other stuff idk
+    Probabilistic Bloom Filter | Count-Min Sketch | HyperLogLog
 
+String & Text Algorithms
+
+    Exact Matching KMP | Z-algorithm | Rabin–Karp | Aho–Corasick
+
+    Suffix Structures Suffix Array (+ Kasai LCP) | Suffix Automaton
+
+    Compressed Search Burrows–Wheeler + FM-index
+
+Graph Algorithms
+
+    Traversal / Connectivity DFS & BFS | Bridges & articulation points | Biconnected comps | SCC
+
+    Shortest Paths Dijkstra (binary & Fibonacci heap) | Bellman–Ford | Johnson’s APSP
+
+    Flows & Matchings Dinic / Edmonds–Karp (Max-Flow) | Min-Cost-Max-Flow | Hopcroft–Karp
+
+    Spanning / Covering Kruskal / Prim (MST) | Minimum Path Cover (DAG)
+
+    Tree Tricks Heavy–Light Decomposition | Euler Tour & LCA (binary lifting)
+
+Computational Geometry
+
+Convex Hull | Closest-Pair | Sweep-line (segment intersection) | KD/R-Trees | Delaunay & Voronoi
+
+Number Theory & Combinatorics
+
+Miller–Rabin | Pollard’s Rho | Extended Euclid & CRT | Fast Expo | Baby-Step/Giant-Step | NTT
+
+Dynamic-Programming Optimisations
+
+Bitmask DP | Divide-&-Conquer DP | Convex-Hull Trick / Li-Chao Tree | Knuth & Yao speed-ups
+
+Machine Learning & AI
+
+Classical / Statistical
+Ridge & Lasso | Logistic Reg | Naive Bayes | SVM | Gaussian Process
+Decision Tree → Random Forest → GBT | K-NN | K-Means | PCA / Kernel PCA | GMM
+
+Deep & Generative
+MLP | CNN | RNN/LSTM/GRU | Transformer (encoder–decoder, BERT, GPT-style)
+Diffusion Models | GANs | VAEs | Mixture-of-Experts | Graph Nets (GCN, GAT, GraphSAGE)
+
+NLP & LLM Tooling
+Tokenisation/BPE | Seq2Seq + Attention | Retrieval-Augmented Generation (RAG)
+LoRA / QLoRA fine-tuning
+
+Reinforcement Learning
+Q-learning / DQN / Double-DQN | Policy Gradient / REINFORCE | Actor-Critic / PPO
+Model-based RL (MuZero) | Offline RL & RLHF | Hierarchical & Multi-Agent RL
+
+Numerical Methods & Scientific Computing
+
+Root-finders (Bisection, Newton, Secant, Brent)
+ODE solvers (RK4, RKF45, Adams) | PDE solvers (Crank–Nicolson, ADI, FEM)
+Linear systems (Jacobi, Gauss–Seidel, Conjugate Gradient, Multigrid)
+FFT / NTT | Randomised SVD | Arnoldi / Lanczos | MCMC (Metropolis–Hastings, HMC)
+PageRank (power iteration)
+
+Parallel & Systems Extras
+
+CUDA/OpenCL primitives (prefix-sum, radix sort)
+Lock-free queues | Concurrent hash-trie | MapReduce / Spark patterns
