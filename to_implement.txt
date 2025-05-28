@@ -45,7 +45,7 @@ Bitmask DP | Divide-&-Conquer DP | Convex-Hull Trick / Li-Chao Tree |�
 Machine Learning & AI
 
 Classical / Statistical
-Ridge & Lasso | Logistic Reg | Naive Bayes | SVM | Gaussian Process
+Ridge & Lasso | Naive Bayes | SVM | Gaussian Process
 Decision Tree → Random Forest → GBT | K-NN | K-Means | PCA / Kernel PCA | GMM
 
 Deep & Generative
