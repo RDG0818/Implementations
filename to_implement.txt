@@ -20,6 +20,8 @@ String & Text Algorithms
 
 Graph Algorithms
 
+    topological sort and DAGs
+
     Traversal / Connectivity DFS & BFS | Bridges & articulation points | Biconnected comps | SCC
 
     Shortest Paths Dijkstra (binary & Fibonacci heap) | Bellman–Ford | Johnson’s APSP
