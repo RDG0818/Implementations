@@ -2,7 +2,7 @@
 Basic implementation of fundamental graph algorithms.
 
 Depth-First Search: O(V + E)
-Uses: Path Finding, Cycle Detection, Bipartite Checking, Connected Components, Topological Sort
+Uses: Path Finding, Directed/Undirected Cycle Detection, Bipartite Checking, Connected Components, Topological Sort, Kosaraju
 
 Breadth-First Search: O(V + E)
 
@@ -20,6 +20,7 @@ Kruskal's Algorithm: O(E log E) or O(E log V)
 #include <vector>
 #include <stack>
 #include <queue>
+#include <algorithm>
 
 using namespace std;
 
@@ -30,6 +31,7 @@ void dfs_path_finding(vector<vector<int>>& graph, int starting_node, int target_
     st.push(starting_node);
     vector<bool> visited(graph.size(), false);
     vector<int> prev(graph.size(), -1);
+    visited[starting_node] = true;
     while(!st.empty()) {
         int curr_node = st.top();
         st.pop();
@@ -37,7 +39,7 @@ void dfs_path_finding(vector<vector<int>>& graph, int starting_node, int target_
             cout << "Path Exists" << endl;
             int node = target_node;
             vector<int> path = {node};
-            while (node != -1) {
+            while (node != starting_node) {
                 path.push_back(prev[node]);
                 node = prev[node];
             }
@@ -46,11 +48,10 @@ void dfs_path_finding(vector<vector<int>>& graph, int starting_node, int target_
             }
             return;
         }
-        if (visited[curr_node]) continue;
-        visited[curr_node] = true;
         for (int neighbor : graph[curr_node]) {
             if (!visited[neighbor]) {
                 st.push(neighbor);
+                visited[curr_node] = true;
                 prev[neighbor] = curr_node;
             }
         }
@@ -68,19 +69,18 @@ void undirected_cycle_check(vector<vector<int>>& graph) {
         if (!visited[starting_node]) {
             components++;
             st.push(starting_node);
-            while(!st.empty() and !found_cycle) {
+            visited[starting_node] = true;
+            while(!st.empty()) {
                 int curr_node = st.top();
                 st.pop();
-                if (visited[curr_node]) continue;
-                visited[curr_node] = true;
                 for (int neighbor : graph[curr_node]) {
                     if (!visited[neighbor]) {
                         st.push(neighbor);
+                        visited[neighbor] = true;
                         prev[neighbor] = curr_node;
                     }
-                    else if (visited[neighbor] and neighbor != prev[curr_node]) {
-                        found_cycle = true;
-                        break;
+                    else if (visited[neighbor] && neighbor != prev[curr_node]) {
+                        found_cycle = true; // Can break here if you do not need to find components
                     }
                 }
             }
@@ -92,6 +92,39 @@ void undirected_cycle_check(vector<vector<int>>& graph) {
     cout << "Total Components: " << components << endl;
 }
 
+void directed_cycle_check(vector<vector<int>>& graph) {
+    stack<pair<int, int>> st;
+    vector<int> visit_state(graph.size(), 0);
+    bool found_cycle = false;
+    for (int starting_node = 0; starting_node < graph.size() && !found_cycle; starting_node++) {
+        if (visit_state[starting_node] == 0 && !found_cycle) {
+            st.push(pair(starting_node, 0));
+            visit_state[starting_node] = 1;
+            while (!st.empty()) {
+                auto& [curr_node, idx] = st.top();
+
+                if (idx < (int)graph[curr_node].size()) {
+                    int neighbor = graph[curr_node][idx++];
+                    if (visit_state[neighbor] == 0) {
+                        st.push(pair(neighbor, 0));
+                        visit_state[neighbor] = 1;
+                    }
+                    else if (visit_state[neighbor] == 1) { // back edge detected
+                        found_cycle = true;
+                        break;
+                    } 
+                }
+                else {
+                    visit_state[curr_node] = 2;
+                    st.pop();
+                }
+            }
+        }
+    }
+    if (!found_cycle) cout << "No Cycle Found" << endl;
+    else cout << "Found Cycle" << endl;
+}
+
 void bipartite_check(vector<vector<int>>& graph) {
     stack<int> st;
     vector<int> color(graph.size(), -1);
@@ -100,7 +133,7 @@ void bipartite_check(vector<vector<int>>& graph) {
         if (color[starting_node] == -1) {
             st.push(starting_node);
             color[starting_node] = 0;
-            while (!st.empty() and bipartite) {
+            while (!st.empty() && bipartite) {
                 int curr_node = st.top();
                 st.pop();
                 for (int neighbor : graph[curr_node]) {
@@ -119,6 +152,43 @@ void bipartite_check(vector<vector<int>>& graph) {
     }
     if (bipartite) cout << "Graph is bipartite" << endl;
     else cout << "Graph is not bipartite" << endl;
+}
+
+void topological_sort(vector<vector<int>>& graph) { // Assumes graph is directed and acyclic
+    stack<pair<int, int>> st;
+    vector<int> visit_state(graph.size(), 0);
+    vector<int> sort_order;
+    for (int starting_node = 0; starting_node < graph.size(); starting_node++) {
+        if (visit_state[starting_node] == 0) {
+            st.push(pair(starting_node, 0));
+            visit_state[starting_node] = 1;
+            while (!st.empty()) {
+                auto& [curr_node, idx] = st.top();
+                if (idx < (int)graph[curr_node].size()) {
+                    int neighbor = graph[curr_node][idx++];
+                    if (visit_state[neighbor] == 0) {
+                        st.push(pair(neighbor, 0));
+                        visit_state[neighbor] = 1;
+                    }
+                }
+                else {
+                    st.pop();
+                    visit_state[curr_node] = 2;
+                    sort_order.push_back(curr_node);
+                }
+            }
+        }
+    }
+    reverse(sort_order.begin(), sort_order.end());
+    for (int node : sort_order) {
+        cout << node << " ";
+    }
+    cout << endl;
+
+}
+
+void kosaraju(vector<vector<int>>& graph) {
+
 }
 
 void bfs() {
@@ -147,19 +217,20 @@ int M; // Edges
 
 cin >> N >> M;
 
-vector<vector<int>> unweighted_graph(N);
+vector<vector<int>> graph(N);
 
-// Will be given M lines, each having u and v, indicating an edge between vertex u and v
+// Will be given M lines, each having u && v, indicating an edge between vertex u && v
 
 int u, v;
 for (int i = 0; i < M; i++) {
     cin >> u >> v;
-    unweighted_graph[u].push_back(v); unweighted_graph[v].push_back(u);
+    graph[u].push_back(v); 
 }
 
-
-undirected_cycle_check(unweighted_graph);
-bipartite_check(unweighted_graph);
-
+// dfs_path_finding(unweighted_graph, 0, 3); 
+// undirected_cycle_check(unweighted_graph);
+// bipartite_check(unweighted_graph);
+directed_cycle_check(graph);
+topological_sort(graph);
 return 0;
 }
