@@ -244,8 +244,36 @@ void kosaraju(vector<vector<int>>& graph) { // Assumes graph is directed
     for (int i = 0; i < component_id.size(); i++) cout << "Node: " << i << " | ID: " << component_id[i] << endl;
 }
 
-void bfs() {
+void bfs(vector<vector<int>>& graph, int start_node, int end_node) {
+    vector<int> distance(graph.size(), -1); distance[start_node] = 0;
+    vector<int> prev(graph.size(), -1);
+    queue<int> q; q.push(start_node);
+    while (!q.empty()) {
+        int curr_node = q.front();
+        q.pop();
+        for (int neighbor : graph[curr_node]) {
+            if (distance[neighbor] == -1) {
+                distance[neighbor] = distance[curr_node] + 1;
+                prev[neighbor] = curr_node;
+                q.push(neighbor);
+            }
+        }
+    }
+    stack<int> st;
+    int curr_node = end_node;
+    while(curr_node != -1) {
+        st.push(curr_node);
+        curr_node = prev[curr_node];
+    }
 
+    cout << "Distance from " << start_node << " to " << end_node << ": " << distance[end_node] << endl;
+    cout << "Path:" << endl;
+    while(!st.empty()) {
+        cout << st.top() << " ";
+        st.pop();
+    }
+    cout << endl;
+    
 }
 
 void djikstra() {
@@ -277,13 +305,12 @@ vector<vector<int>> graph(N);
 int u, v;
 for (int i = 0; i < M; i++) {
     cin >> u >> v;
-    graph[u].push_back(v); 
+    graph[u].push_back(v); graph[v].push_back(u);   
 }
 
 // dfs_path_finding(unweighted_graph, 0, 3); 
 // undirected_cycle_check(unweighted_graph);
 // bipartite_check(unweighted_graph);
-directed_cycle_check(graph);
-kosaraju(graph);
+bfs(graph, 0, 5);
 return 0;
 }
