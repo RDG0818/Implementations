@@ -5,14 +5,19 @@ Depth-First Search: O(V + E)
 Uses: Path Finding, Directed/Undirected Cycle Detection, Bipartite Checking, Connected Components, Topological Sort, Kosaraju
 
 Breadth-First Search: O(V + E)
+Uses: Unweighted Shortest Path Finding
 
 Djikstra's Algorithm/A*: O((V + E)log V) or O(V^2)
+Uses: Weighted Shortest Path Finding (No negative edges)
 
 Bellman Ford: O(V * E)
+Uses: Weighted Shortest Path Finding
 
 Prim's Algorithm: O((V + E)log V) or O(V^2)
+Uses: Minimum Spanning Tree
 
 Kruskal's Algorithm: O(E log E) or O(E log V)
+Uses: Minimum Spanning Tree
 
 */
 
