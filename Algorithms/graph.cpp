@@ -26,6 +26,7 @@ Uses: Minimum Spanning Tree
 #include <stack>
 #include <queue>
 #include <algorithm>
+#include <functional>
 
 using namespace std;
 
@@ -281,7 +282,28 @@ void bfs(vector<vector<int>>& graph, int start_node, int end_node) {
     
 }
 
-void djikstra() {
+void djikstra(vector<vector<pair<int, int>>>& graph) { // Assumes weighted graph and starting at node 0
+    int n = graph.size();
+    vector<int> distances(n, INT_MAX);
+
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> min_heap;
+    min_heap.push(pair(0, 0));
+    while (!min_heap.empty()) {
+        auto [distance, curr_node] = min_heap.top();
+        min_heap.pop();
+        if (distances[curr_node] < distance) continue;
+        distances[curr_node] = distance;
+        for (pair<int, int> neighbor : graph[curr_node]) {
+            if (neighbor.first + distance < distances[neighbor.second]) {
+                distances[neighbor.second] = neighbor.first + distance;
+                min_heap.push(pair<int, int> (neighbor.first + distance, neighbor.second));
+            }
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        cout << "Node: " << i << " | Distance: " << distances[i] << endl;
+    }
 
 }
 
@@ -303,19 +325,19 @@ int M; // Edges
 
 cin >> N >> M;
 
-vector<vector<int>> graph(N);
+vector<vector<pair<int,int>>> graph(N);
 
-// Will be given M lines, each having u && v, indicating an edge between vertex u && v
+// Will be given M lines, each having u && v && d, indicating an edge between vertex u && v and distance d
 
-int u, v;
+int u, v, d;
 for (int i = 0; i < M; i++) {
-    cin >> u >> v;
-    graph[u].push_back(v); graph[v].push_back(u);   
+    cin >> u >> v >> d;
+    graph[u].push_back(pair<int, int> (d, v)); graph[v].push_back(pair<int, int> (d, u));   
 }
 
 // dfs_path_finding(unweighted_graph, 0, 3); 
 // undirected_cycle_check(unweighted_graph);
 // bipartite_check(unweighted_graph);
-bfs(graph, 0, 5);
+djikstra(graph);
 return 0;
 }

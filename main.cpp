@@ -20,45 +20,48 @@ str s, s1, s2, s3, s4, s5;
 ll a, b, c, n, m, k, q, t, x, y, z;
 
 int main() {
-    cin >> n >> k;
+    cin >> n;
     vll v(n);
     read(v);
+    vvll graph(n);
+    vll prev(n, -1);
+    vector<bool> visit(n, false);
+    bool triangle = false;
 
-    sort(v.begin(), v.end());
-    ll upper = v[v.size() - 1] + 1;
-    ll lower = 1;
-    ll midpoint;
-    ll iteration = 0;
 
-    while (true) {
-        //if (iteration++ > 10) break;
-        midpoint = (upper + lower)/2;
-        //cout << midpoint << endl;
-        ll sum = 0;
-        for (ll num : v) {
-            sum += ((num-1) / midpoint)+1;
-        }
-        if (sum <= k) {
-            ll midpoint1 = midpoint - 1;
-            if (midpoint1 == 0) break;
-            ll sum1 = 0;
-            for (ll num : v) {
-                sum1 += ((num-1) / midpoint1)+1;
-            }
-            if (sum1 <= k) {
-                upper = midpoint;
-            }
-            else {
-                break;
-            }
-        }
-        else {
-            lower = midpoint;
-        }
-        
+    for (int i = 0; i < n; i++) {
+        graph[i].push_back(v[i]);
     }
 
-    cout << midpoint << endl;
+    for (int starting_node = 0; starting_node < n; starting_node++) {
+        if (visit[starting_node]) continue;
+        stack<int> st;
+        st.push(starting_node);
+        visit[starting_node] = true;
+        while (!st.empty() and !triangle) {
+            int curr_node = st.top();
+            st.pop();
+            for (int neighbor : graph[curr_node]) {
+                if (!visit[neighbor]) {
+                    visit[neighbor] = true;
+                    prev[neighbor] = curr_node;
+                    st.push(neighbor);
+                }
+                if (prev[curr_node] != -1) {
+                    if (prev[prev[curr_node]] != -1) {
+                        if (neighbor == prev[prev[curr_node]])
+                        {
+                            triangle = true; break;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+        if (triangle) cout << "YES" << endl;
+        else cout << "NO" << endl;
 
     return 0;
 }
