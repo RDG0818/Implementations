@@ -307,15 +307,46 @@ void djikstra(vector<vector<pair<int, int>>>& graph) { // Assumes weighted graph
 
 }
 
-void bellman_ford() {
+void bellman_ford(vector<vector<pair<int, int>>>& graph) {
+    int n = graph.size();
+    vector<int> distance(n, INT_MAX);
+    distance[0] = 0;
+    for (int i = 0; i < n - 1; i++) {
+        bool update = false;
+        for (int j = 0; j < n; j++) {
+            for (int k = 0; k < graph[j].size(); k++) {
+                int u = j; int v = graph[j][k].second; int w = graph[j][k].first;
+                if (distance[u] != INT_MAX and distance[u] + w < distance[v]) {
+                    distance[v] = distance[u] + w;
+                    update = true;
+                }
+            }
+        }
+        if (!update) break;
+    }
 
+    for (int i = 0; i < n; i++) {
+        cout << "Node: " << i << " | Distance: " << distance[i] << endl;
+    }
 }
 
-void prim() {
+void prim(vector<vector<pair<int,int>>> graph) { // Assumes a fully connected graph
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> min_heap; // {weight, node}
+    vector<bool> inMST(graph.size(), false);
+    int mst_weights = 0;
+    min_heap.push(pair<int, int> {0, 0});
+    while (!min_heap.empty()) {
+        auto[weight, curr_node] = min_heap.top();
+        min_heap.pop();
+        if (inMST[curr_node]) continue;
+        mst_weights += weight;
+        inMST[curr_node] = true;
+        for (pair<int, int> p : graph[curr_node]) {
+            if (!inMST[p.second]) min_heap.push(p);
+        }
+    }
 
-}
-
-void kruskal() {
+    cout << "Minimum Spanning Tree Total Cost: " << mst_weights << endl;
 
 }
 
@@ -338,6 +369,6 @@ for (int i = 0; i < M; i++) {
 // dfs_path_finding(unweighted_graph, 0, 3); 
 // undirected_cycle_check(unweighted_graph);
 // bipartite_check(unweighted_graph);
-djikstra(graph);
+prim(graph);
 return 0;
 }

@@ -20,15 +20,13 @@ String & Text Algorithms
 
 Graph Algorithms
 
-    topological sort and DAGs
+    Bridges & articulation points | Biconnected comps 
 
-    Traversal / Connectivity DFS & BFS | Bridges & articulation points | Biconnected comps | SCC
-
-    Shortest Paths Dijkstra (binary & Fibonacci heap) | Bellman–Ford | Johnson’s APSP
+    | Johnson’s APSP
 
     Flows & Matchings Dinic / Edmonds–Karp (Max-Flow) | Min-Cost-Max-Flow | Hopcroft–Karp
 
-    Spanning / Covering Kruskal / Prim (MST) | Minimum Path Cover (DAG)
+    Spanning / Covering Kruskal | Minimum Path Cover (DAG)
 
     Tree Tricks Heavy–Light Decomposition | Euler Tour & LCA (binary lifting)
 
