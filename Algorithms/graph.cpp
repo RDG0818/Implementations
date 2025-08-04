@@ -316,7 +316,7 @@ void bellman_ford(vector<vector<pair<int, int>>>& graph) {
         for (int j = 0; j < n; j++) {
             for (int k = 0; k < graph[j].size(); k++) {
                 int u = j; int v = graph[j][k].second; int w = graph[j][k].first;
-                if (distance[u] != INT_MAX and distance[u] + w < distance[v]) {
+                if (distance[u] != INT_MAX && distance[u] + w < distance[v]) {
                     distance[v] = distance[u] + w;
                     update = true;
                 }
