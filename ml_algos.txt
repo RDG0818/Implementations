@@ -1,0 +1,43 @@
+Theory:
+Motivation & Intuition
+    What problem is solved
+    Core idea
+Formal Definition & Pseudocode
+    pseudocode for step-by-step process (think research paper style)
+    Mathematical formulation
+        What is the Hypothesis space
+        what is the loss function
+        what is the learning principle
+        what are the generalization bounds
+Derivations/Convergence
+    step-by-step derivations if applicable
+    proof of convergence
+Complexity Analysis
+    best, average, worst-case with justification
+    Includes time, space, and sample complexity
+Relation to other algorithms
+    Special Case or Generalization?
+    Closest relatives?
+    dual formulations?
+Assumptions and Limitations
+    state preconditions and where it fails
+Pros & Cons
+    list strength and weaknesses
+
+Implementation:
+Hierarchy of ABCs
+Unit Tests for correctness
+Benchmark Tests for performance
+    standardized dataset like MNIST
+
+Experimental Analysis:
+Performance Validation
+    Compare accuracy, precision, recall, f1-score, mse, silhouette score
+    compare run-times
+Parameter Sensitivity
+    plot change in performance as we vary hyperparam
+Visualizations
+    decision boundaries, scatter plots (clustering)
+
+
+
